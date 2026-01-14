@@ -97,6 +97,24 @@
             border-radius: 30px;
             backdrop-filter: blur(20px);
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+        /* 个人照片样式 */
+        .profile-img {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--glass-border);
+            box-shadow: 0 0 30px var(--accent-glow);
+            flex-shrink: 0;
+        }
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
         }
         .hero h1 {
             font-size: clamp(2.5rem, 6vw, 4rem);
@@ -112,6 +130,19 @@
             margin-bottom: 1.5rem;
             display: block;
         }
+        /* 学校专业信息样式 */
+        .edu-info {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .edu-info i {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
         .description {
             max-width: 650px;
             color: var(--text-secondary);
@@ -120,7 +151,7 @@
         }
 
         /* --- 按钮 --- */
-        .btn-group { display: flex; gap: 1rem; }
+        .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
         .btn {
             padding: 0.8rem 1.8rem;
             border-radius: 12px;
@@ -181,9 +212,24 @@
 
         /* --- 响应式 --- */
         @media (max-width: 768px) {
-            .hero-card { padding: 2rem; }
+            .hero-card { 
+                padding: 2rem; 
+                gap: 2rem;
+                justify-content: center;
+                text-align: center;
+            }
+            .profile-img {
+                width: 180px;
+                height: 180px;
+            }
+            .edu-info {
+                justify-content: center;
+            }
             nav ul { display: none; }
-            .btn-group { flex-direction: column; }
+            .btn-group { 
+                flex-direction: column; 
+                align-items: center;
+            }
         }
     </style>
 </head>
@@ -209,19 +255,28 @@
     <header class="hero" id="about">
         <div class="container">
             <div class="hero-card" data-aos="fade-up">
-                <span class="subtitle">AI & Geospatial Researcher</span>
-                <h1>陈选磊 Xuanlei Chen</h1>
-                <p class="description">
-                    深耕于<strong>空间众包</strong>与<strong>强化学习</strong>的交汇点。
-                    目前致力于利用多智能体决策框架，优化大规模动态环境下的时空任务分配问题。
-                </p>
-                <div class="btn-group">
-                    <a href="https://github.com/XuanleiChen" target="_blank" class="btn btn-primary">
-                        <i class="fab fa-github"></i> GitHub Profile
-                    </a>
-                    <a href="mailto:xuanlei.chen@example.com" class="btn btn-outline">
-                        <i class="fas fa-envelope"></i> 获取简历
-                    </a>
+                <!-- 个人照片 -->
+                <img src="images/profile.png" alt="陈选磊 个人照片" class="profile-img" data-aos="fade-right">
+                <div class="hero-text" data-aos="fade-left">
+                    <span class="subtitle">AI & Geospatial Researcher</span>
+                    <h1>陈选磊 Xuanlei Chen</h1>
+                    <!-- 新增学校专业信息 -->
+                    <div class="edu-info">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>三峡大学科技学院 | 计算机科学与技术专业</span>
+                    </div>
+                    <p class="description">
+                        深耕于<strong>空间众包</strong>与<strong>强化学习</strong>的交汇点。
+                        目前致力于利用多智能体决策框架，优化大规模动态环境下的时空任务分配问题。
+                    </p>
+                    <div class="btn-group">
+                        <a href="https://github.com/XuanleiChen" target="_blank" class="btn btn-primary">
+                            <i class="fab fa-github"></i> GitHub Profile
+                        </a>
+                        <a href="mailto:xuanlei.chen@example.com" class="btn btn-outline">
+                            <i class="fas fa-envelope"></i> 获取简历
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
