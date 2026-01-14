@@ -1,342 +1,253 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>陈选磊 | Xuanlei Chen - Personal Page</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>陈选磊 | Xuanlei Chen</title>
 
-    <style>
-        /* --- 全局变量与基础设置 --- */
-        :root {
-            --accent: #6366f1; /* 主色调：靛蓝色 */
-            --accent-glow: rgba(99, 102, 241, 0.4);
-            --bg-dark: #0b0f1a;
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-        }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
+<style>
+:root{
+    --accent:#6366f1;
+    --glow:rgba(99,102,241,.45);
+    --bg:#0b0f1a;
+    --glass:rgba(255,255,255,.05);
+    --border:rgba(255,255,255,.12);
+    --text:#f1f5f9;
+    --sub:#94a3b8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    background:radial-gradient(circle at 50% 50%,#161e31,#0b0f1a);
+    color:var(--text);
+    font-family:Inter,system-ui;
+    overflow-x:hidden;
+}
 
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-primary);
-            font-family: 'Inter', -apple-system, system-ui, sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+/* 光标能量 */
+.cursor-glow{
+    position:fixed;
+    width:320px;height:320px;
+    background:radial-gradient(circle,var(--glow),transparent 60%);
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+    z-index:0;
+}
 
-        /* --- 动态光晕背景 --- */
-        .bg-blob {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            overflow: hidden;
-            background: radial-gradient(circle at 50% 50%, #161e31 0%, #0b0f1a 100%);
-        }
-        .blob {
-            position: absolute;
-            width: 500px; height: 500px;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-            border-radius: 50%;
-            filter: blur(60px);
-            animation: move 25s infinite alternate;
-        }
-        .blob-1 { top: -100px; left: -100px; }
-        .blob-2 { bottom: -100px; right: -100px; animation-delay: -5s; }
+/* 背景 */
+.bg-blob{position:fixed;inset:0;z-index:-1}
+.blob{
+    position:absolute;
+    width:500px;height:500px;
+    background:radial-gradient(circle,var(--glow),transparent 70%);
+    filter:blur(70px);
+    animation:float 22s infinite alternate;
+}
+.blob.a{top:-150px;left:-150px}
+.blob.b{bottom:-150px;right:-150px;animation-delay:-6s}
+@keyframes float{to{transform:translate(200px,120px) scale(1.2)}}
 
-        @keyframes move {
-            from { transform: translate(0, 0) scale(1); }
-            to { transform: translate(150px, 100px) scale(1.2); }
-        }
+/* 布局 */
+.container{max-width:1100px;margin:auto;padding:0 24px}
+nav{
+    position:sticky;top:0;z-index:10;
+    backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--border);
+}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0}
+.logo{font-weight:800;font-size:1.5rem}
+.logo span{color:var(--accent)}
+nav ul{display:flex;gap:2rem;list-style:none}
+nav a{color:var(--sub);text-decoration:none}
+nav a:hover{color:#fff}
 
-        /* --- 容器 --- */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
+/* Hero */
+.hero{padding:100px 0}
+.hero-card{
+    display:flex;gap:4rem;flex-wrap:wrap;
+    padding:4rem;border-radius:32px;
+    background:var(--glass);
+    border:1px solid var(--border);
+    backdrop-filter:blur(22px);
+    box-shadow:0 40px 80px rgba(0,0,0,.6);
+}
+.profile{
+    width:220px;height:220px;border-radius:50%;
+    object-fit:cover;
+    border:4px solid var(--border);
+    animation:pulse 4s infinite;
+}
+@keyframes pulse{
+    0%{box-shadow:0 0 20px var(--glow)}
+    50%{box-shadow:0 0 50px var(--glow)}
+    100%{box-shadow:0 0 20px var(--glow)}
+}
+.hero h1{
+    font-size:clamp(2.5rem,6vw,4rem);
+    background:linear-gradient(135deg,#fff,#94a3b8);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+.subtitle{color:var(--accent);font-weight:600}
 
-        /* --- 导航栏 --- */
-        nav {
-            padding: 1.5rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--glass-border);
-        }
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -1px; }
-        .logo span { color: var(--accent); }
-        nav ul { display: flex; list-style: none; gap: 2rem; }
-        nav ul a { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: 0.3s; }
-        nav ul a:hover { color: white; }
+/* 信息条 */
+.info-list{
+    margin:1.5rem 0 2rem;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:.8rem 1.2rem;
+}
+.info-item{
+    display:flex;
+    align-items:center;
+    gap:.7rem;
+    padding:.6rem 1rem;
+    border-radius:14px;
+    background:rgba(255,255,255,.04);
+    border:1px solid var(--border);
+    color:var(--sub);
+    transition:.3s;
+}
+.info-item i{color:var(--accent)}
+.info-item:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(0,0,0,.4);
+}
 
-        /* --- Hero 主视角区域 --- */
-        .hero {
-            padding: 100px 0 60px;
-        }
-        .hero-card {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            padding: 4rem;
-            border-radius: 30px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
-            display: flex;
-            align-items: center;
-            gap: 4rem;
-            flex-wrap: wrap;
-        }
-        /* 个人照片样式 */
-        .profile-img {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--glass-border);
-            box-shadow: 0 0 30px var(--accent-glow);
-            flex-shrink: 0;
-        }
-        .hero-text {
-            flex: 1;
-            min-width: 300px;
-        }
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            margin-bottom: 1rem;
-            background: linear-gradient(to bottom right, #ffffff 30%, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .subtitle {
-            font-size: 1.2rem;
-            color: var(--accent);
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-        /* 学校专业信息样式 */
-        .edu-info {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-        .edu-info i {
-            color: var(--accent);
-            font-size: 1.2rem;
-        }
-        .description {
-            max-width: 650px;
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            margin-bottom: 2.5rem;
-        }
+.desc{color:var(--sub);max-width:640px;margin-bottom:2rem}
 
-        /* --- 按钮 --- */
-        .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
-        .btn {
-            padding: 0.8rem 1.8rem;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-        .btn-primary { background: var(--accent); color: white; }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px var(--accent-glow); }
-        .btn-outline { border: 1px solid var(--glass-border); color: white; }
-        .btn-outline:hover { background: var(--glass); }
+/* 按钮 */
+.btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{
+    padding:.8rem 1.8rem;border-radius:14px;
+    font-weight:600;text-decoration:none;
+    transition:.3s;
+}
+.primary{background:var(--accent);color:#fff}
+.primary:hover{transform:translateY(-4px);box-shadow:0 12px 30px var(--glow)}
+.outline{border:1px solid var(--border);color:#fff}
+.outline:hover{background:var(--glass)}
 
-        /* --- 板块通用 --- */
-        section { padding: 100px 0; }
-        .section-title {
-            font-size: 2rem;
-            margin-bottom: 3rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        .section-title::after {
-            content: "";
-            height: 1px;
-            flex-grow: 1;
-            background: var(--glass-border);
-        }
+/* 区块 */
+section{padding:100px 0}
+.title{display:flex;gap:1rem;align-items:center;margin-bottom:3rem;font-size:2rem}
+.title::after{content:"";flex:1;height:1px;background:var(--border)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem}
 
-        /* --- 研究领域卡片 --- */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        .card {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            padding: 2.5rem;
-            border-radius: 20px;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-            background: rgba(255, 255, 255, 0.05);
-        }
-        .card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 1.5rem; }
-        .card h3 { margin-bottom: 1rem; }
-        .card p { color: var(--text-secondary); font-size: 0.95rem; }
+/* 卡片 */
+.card{
+    background:var(--glass);
+    border:1px solid var(--border);
+    padding:2.5rem;border-radius:24px;
+    transition:.4s;
+    transform-style:preserve-3d;
+}
+.card:hover{
+    transform:translateY(-12px) rotateX(6deg) rotateY(-6deg);
+    box-shadow:0 40px 70px rgba(0,0,0,.7);
+    border-color:var(--accent);
+}
+.card i{font-size:2.5rem;color:var(--accent);margin-bottom:1rem}
+.card p{color:var(--sub);font-size:.95rem}
 
-        /* --- 页脚 --- */
-        footer {
-            padding: 50px 0;
-            text-align: center;
-            border-top: 1px solid var(--glass-border);
-            color: var(--text-secondary);
-        }
+/* 页脚 */
+footer{text-align:center;padding:50px 0;border-top:1px solid var(--border);color:var(--sub)}
 
-        /* --- 响应式 --- */
-        @media (max-width: 768px) {
-            .hero-card { 
-                padding: 2rem; 
-                gap: 2rem;
-                justify-content: center;
-                text-align: center;
-            }
-            .profile-img {
-                width: 180px;
-                height: 180px;
-            }
-            .edu-info {
-                justify-content: center;
-            }
-            nav ul { display: none; }
-            .btn-group { 
-                flex-direction: column; 
-                align-items: center;
-            }
-        }
-    </style>
+@media(max-width:768px){
+    nav ul{display:none}
+    .hero-card{text-align:center;justify-content:center}
+}
+</style>
 </head>
+
 <body>
 
-    <div class="bg-blob">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
+<div class="cursor-glow"></div>
+<div class="bg-blob">
+    <div class="blob a"></div>
+    <div class="blob b"></div>
+</div>
+
+<nav>
+<div class="container nav">
+    <div class="logo">CHEN<span>.</span></div>
+    <ul>
+        <li><a href="#about">关于</a></li>
+        <li><a href="#research">研究</a></li>
+        <li><a href="#contact">联系</a></li>
+    </ul>
+</div>
+</nav>
+
+<header class="hero" id="about">
+<div class="container">
+<div class="hero-card" data-aos="fade-up">
+    <img src="images/profile.png" class="profile">
+    <div>
+        <span class="subtitle">AI & Geospatial Researcher</span>
+        <h1 id="typing"></h1>
+
+        <div class="info-list">
+            <div class="info-item"><i class="fas fa-school"></i>三峡大学科技学院</div>
+            <div class="info-item"><i class="fas fa-laptop-code"></i>计算机科学与技术</div>
+            <div class="info-item"><i class="fas fa-phone"></i>18327555396</div>
+            <div class="info-item"><i class="fab fa-qq"></i>3126418978</div>
+        </div>
+
+        <p class="desc">
+            深耕<strong>空间众包</strong>与<strong>强化学习</strong>交叉方向，
+            聚焦多智能体决策与大规模时空任务分配。
+        </p>
+
+        <div class="btns">
+            <a class="btn primary" href="https://github.com/XuanleiChen" target="_blank">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            <a class="btn outline" href="mailto:xuanlei.chen@example.com">
+                <i class="fas fa-envelope"></i> 简历
+            </a>
+        </div>
     </div>
+</div>
+</div>
+</header>
 
-    <nav>
-        <div class="container nav-content">
-            <div class="logo">CHEN<span>.</span></div>
-            <ul>
-                <li><a href="#about">关于</a></li>
-                <li><a href="#research">研究</a></li>
-                <li><a href="#projects">项目</a></li>
-                <li><a href="#contact">联系</a></li>
-            </ul>
-        </div>
-    </nav>
+<section id="research">
+<div class="container">
+<h2 class="title">研究方向</h2>
+<div class="grid">
+    <div class="card"><i class="fas fa-satellite"></i><h3>空间众包</h3><p>大规模动态环境下任务分配与激励。</p></div>
+    <div class="card"><i class="fas fa-brain"></i><h3>强化学习</h3><p>深度强化学习与组合优化。</p></div>
+    <div class="card"><i class="fas fa-map"></i><h3>时空数据挖掘</h3><p>GNN 建模城市轨迹与交通流。</p></div>
+</div>
+</div>
+</section>
 
-    <header class="hero" id="about">
-        <div class="container">
-            <div class="hero-card" data-aos="fade-up">
-                <!-- 个人照片 -->
-                <img src="images/profile.png" alt="陈选磊 个人照片" class="profile-img" data-aos="fade-right">
-                <div class="hero-text" data-aos="fade-left">
-                    <span class="subtitle">AI & Geospatial Researcher</span>
-                    <h1>陈选磊 Xuanlei Chen</h1>
-                    <!-- 新增学校专业信息 -->
-                    <div class="edu-info">
-                        <i class="fas fa-graduation-cap"></i>
-                        <span>三峡大学科技学院 | 计算机科学与技术专业</span>
-                    </div>
-                    <p class="description">
-                        深耕于<strong>空间众包</strong>与<strong>强化学习</strong>的交汇点。
-                        目前致力于利用多智能体决策框架，优化大规模动态环境下的时空任务分配问题。
-                    </p>
-                    <div class="btn-group">
-                        <a href="https://github.com/XuanleiChen" target="_blank" class="btn btn-primary">
-                            <i class="fab fa-github"></i> GitHub Profile
-                        </a>
-                        <a href="mailto:xuanlei.chen@example.com" class="btn btn-outline">
-                            <i class="fas fa-envelope"></i> 获取简历
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+<footer id="contact">
+<p>Built with ❤️ by Xuanlei Chen</p>
+<p style="font-size:.8rem">© 2026 | Curious Forever</p>
+</footer>
 
-    <section id="research">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-right">研究方向</h2>
-            <div class="grid">
-                <div class="card" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fas fa-satellite-dish"></i>
-                    <h3>空间众包 (Spatial Crowdsourcing)</h3>
-                    <p>研究大规模动态环境下工人与任务的高效匹配策略，平衡平台收益与用户体验。</p>
-                </div>
-                <div class="card" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-brain"></i>
-                    <h3>强化学习 (DRL)</h3>
-                    <p>探索深度强化学习在处理组合优化问题（Combinatorial Optimization）中的应用潜能。</p>
-                </div>
-                <div class="card" data-aos="fade-up" data-aos-delay="300">
-                    <i class="fas fa-map-location-dot"></i>
-                    <h3>时空数据挖掘</h3>
-                    <p>基于图神经网络（GNN）对城市轨迹和交通流进行建模，捕捉复杂的空间依赖性。</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init({duration:800,once:true});
 
-    <section id="projects">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-right">开源贡献</h2>
-            <div class="grid">
-                <div class="card" data-aos="fade-up">
-                    <div style="display:flex; justify-content: space-between; align-items:flex-start;">
-                        <h3>Spatial-Partition-Framework</h3>
-                        <a href="https://github.com/XuanleiChen" style="color:var(--accent)"><i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                    <p style="margin-top:1rem;">一种基于 C++ 开发的高性能地理空间分区工具包，专为处理数百万级的点位数据设计。</p>
-                    <div style="margin-top:1.5rem;">
-                        <span style="font-size:0.8rem; background:rgba(99,102,241,0.1); padding:4px 10px; border-radius:5px; color:var(--accent);">C++</span>
-                        <span style="font-size:0.8rem; background:rgba(99,102,241,0.1); padding:4px 10px; border-radius:5px; color:var(--accent); margin-left:5px;">GIS</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+/* 光标 */
+const glow=document.querySelector('.cursor-glow');
+document.addEventListener('mousemove',e=>{
+    glow.style.left=e.clientX+'px';
+    glow.style.top=e.clientY+'px';
+});
 
-    <footer id="contact">
-        <div class="container">
-            <p>Built with ❤️ by Xuanlei Chen</p>
-            <p style="margin-top:10px; font-size:0.8rem;">© 2026 | 始终保持对技术的好奇心</p>
-        </div>
-    </footer>
+/* 打字机 */
+const txt="陈选磊 Xuanlei Chen";
+let i=0,el=document.getElementById("typing");
+(function type(){
+    if(i<txt.length){el.textContent+=txt[i++];setTimeout(type,120);}
+})();
+</script>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 800,
-            once: true
-        });
-    </script>
 </body>
 </html>
